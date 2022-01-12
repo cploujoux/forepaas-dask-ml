@@ -1,0 +1,63 @@
+### Config file for elastic search
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-seed
+  namespace: connectors
+data:
+  seed.sql: |
+    SELECT 'CREATE DATABASE test' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'test')\gexec
+    \c test
+    CREATE TABLE IF NOT EXISTS consommations
+    (
+        conso_id         double precision                         not null
+            primary key,
+        boolean          boolean                     null,
+        ca               double precision                         null,
+        date             date                                  null,
+        datetime         timestamp                              null,
+        departments      text                     null,
+        lat              double precision                         null,
+        lng              double precision                         null,
+        qte              double precision                         null,
+        siege_social     text                     null,
+        time             text                     null,
+        ville            text                     null
+    );
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (1, 'TRUE', 0, '2015-10-18', '2018-06-03 11:02:00', 'fr-61', 79.2734, 118.3814, 74, 'Google', '10:30:18', 'Lille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (2, 'TRUE', 80.85, '2020-09-01', '2021-07-24 01:04:00', 'fr-84', 22.2453, -156.8234, 0, 'Snapchat', '01:05:05', 'Bordeaux');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (3, 'FALSE', 842.67, '2020-01-23', null, 'fr-19', -18.5864, 162.4643, 0, 'Google', '05:06:44', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (4, 'TRUE', 766.71, '2021-08-22', '2020-09-03 10:50:00', 'fr-62', -73.5656, -80.4554, 0, 'Google', '', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (5, 'FALSE', 624.45, '2020-04-12', '2021-07-21 09:37:00', 'fr-19', -71.2265, -27.7375, 0, 'Pied Piper', '10:05:14', '');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (6, 'FALSE', 455.34, null, '2019-09-15 06:03:00', 'fr-38', 0, 176.5186, 0, 'Pied Piper', '07:29:00', 'Lille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (7, 'TRUE', 160.05, '2021-11-27', '2021-10-15 08:26:00', 'fr-55', -16.5659, -9.3823, 0, 'Google', '01:52:40', 'Bordeaux');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (8, 'TRUE', 513.81, '2019-10-04', '2021-09-03 06:02:00', 'fr-94', 79.1745, -27.9373, 0, 'Facebook', '07:14:22', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (9, 'TRUE', 32.68, '2021-09-05', '2019-02-22 06:07:00', 'fr-23', -67.9825, -84.0614, 0, 'Facebook', '10:43:30', 'Lille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (10, 'TRUE', 476.99, '2021-10-20', '2021-06-28 05:28:00', 'fr-69', 80.8881, 0, 0, 'Snapchat', '01:34:27', 'Paris');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (11, 'FALSE', 607.43, '2021-05-15', '2021-09-10 09:07:00', 'fr-27', 89.1636, 5.1695, 0, 'Facebook', '05:32:28', 'Lille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (12, 'FALSE', 243.64, '2019-11-22', '2021-05-31 10:32:00', 'fr-33', -60.7474, 36.6968, 0, 'Facebook', '10:49:02', 'Bordeaux');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (13, 'FALSE', 866.38, '2021-06-06', '2021-04-15 04:15:00', 'fr-64', 46.2097, 159.4861, 0, 'Pied Piper', '01:52:02', 'Troyes');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (14, 'FALSE', 56.53, '2019-09-14', '2021-03-07 10:31:00', '', 0, 30.7869, 0, 'Snapchat', '02:15:29', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (15, 'TRUE', 320.16, '2019-07-20', '2019-03-13 10:37:00', 'fr-52', 5.7599, -47.4732, 0, 'ForePaaS', '12:13:56', 'Paris');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (16, 'TRUE', 56.78, '2019-11-21', '2019-04-02 01:06:00', 'fr-71', 69.9554, -174.549, 0, '', '11:35:52', 'Lille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (17, 'FALSE', 0, '2020-12-20', '2020-09-11 12:28:00', 'fr-76', 66.3068, -97.2658, 0, 'ForePaaS', '06:16:46', 'Bordeaux');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (18, 'TRUE', 0, null, '2021-04-14 07:56:00', 'fr-16', 42.1995, 39.939, 0, 'Pied Piper', '', 'Paris');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (19, 'TRUE', 0, '2021-12-14', '2021-07-31 05:54:00', 'fr-72', -81.8263, -135.9017, 0, 'Facebook', '10:48:35', 'Troyes');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (20, 'FALSE', 0, '2020-07-27', '2020-05-25 05:50:00', 'fr-79', 61.6265, -46.8967, 0, 'Snapchat', '01:16:04', 'Lille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (21, 'TRUE', 0, '2021-01-13', '2021-03-07 09:59:00', 'fr-14', 77.7594, 129.8035, 72, 'Google', '10:57:37', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (22, 'FALSE', 0, '2020-10-26', '2021-09-13 12:40:00', 'fr-43', 1.655, -83.4428, 15, 'Facebook', '01:33:41', 'Troyes');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (23, 'TRUE', 0, '2020-01-19', '2020-05-29 07:12:00', '', 28.615, 0, 9, 'Snapchat', '', 'Bordeaux');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (24, 'TRUE', 0, '2019-06-29', '2020-12-27 08:06:00', 'fr-66', -58.7519, -20.7238, 26, '', '08:43:52', 'Marseille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (25, 'TRUE', 0, '2021-04-12', '2020-04-17 09:13:00', 'fr-92', 88.1539, 123.2254, 59, 'ForePaaS', '05:11:10', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (26, 'FALSE', 0, '2021-08-23', '2020-08-28 10:25:00', 'fr-10', -45.7741, -97.3019, 17, 'ForePaaS', '10:01:39', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (27, 'TRUE', 0, null, '2021-08-12 11:31:00', 'fr-52', -40.0649, 149.6493, 93, 'Google', '12:23:33', '');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (28, 'TRUE', 0, '2019-09-11', '2021-03-14 10:17:00', 'fr-18', 1.9115, 21.9993, 20, 'Facebook', '02:39:48', 'Toulouse');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (29, 'FALSE', 221.88, '2021-08-19', '2020-04-05 10:09:00', 'fr-35', -62.7594, -153.3597, 13, 'ForePaaS', '09:59:31', 'Paris');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (30, 'FALSE', 408.3, '2019-11-17', '2019-11-03 12:47:00', 'fr-11', -23.6523, -168.2349, 39, 'Google', '06:11:47', 'Marseille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (31, 'TRUE', 165.19, '2021-01-17', '2021-03-08 09:50:00', 'fr-94', 77.3985, -132.147, 15, 'Snapchat', '01:15:07', 'Bordeaux');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (32, 'FALSE', 459.51, '2021-08-24', '2020-03-11 05:02:00', 'fr-39', -42.3055, -31.415, 3, 'Snapchat', '02:13:39', 'Paris');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (33, 'FALSE', 749.46, '2019-03-23', '2021-06-16 03:07:00', 'fr-66', 13.6649, -130.8719, 96, 'Snapchat', '03:37:32', 'Marseille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (34, 'FALSE', 631.76, '2020-05-11', null, '', -70.7076, -59.2577, 14, 'Google', '03:12:25', 'Paris');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (35, 'FALSE', 178.54, '2019-10-07', '2019-05-28 11:11:00', 'fr-14', 74.4481, -53.4716, 44, 'Facebook', '03:32:45', 'Bordeaux');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (36, 'FALSE', 222.03, '2020-09-29', '2020-01-10 04:44:00', 'fr-22', 26.7472, 165.02, 29, 'Pied Piper', '05:28:06', 'Lille');
+    INSERT INTO consommations (conso_id, boolean, ca, date, datetime, departments, lat, lng, qte, siege_social, time, ville) VALUES (37, 'TRUE', 876.52, '2021-08-02', '2020-03-13 10:17:00', 'fr-58', 87.6329, -78.1977, 25, 'Snapchat', '04:41:42', 'Paris');

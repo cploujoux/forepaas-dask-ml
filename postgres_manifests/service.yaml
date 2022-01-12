@@ -1,0 +1,16 @@
+# FOR DEV ONLY
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: connectors
+  name: postgres
+  labels:
+    shortname: postgres
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: postgres

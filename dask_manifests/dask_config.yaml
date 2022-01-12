@@ -1,0 +1,17 @@
+worker:
+  replicas: 2
+  resources:
+    limits:
+      cpu: 1
+      memory: 1G
+    requests:
+      cpu: 1
+      memory: 1G
+  env:
+    # - name: EXTRA_CONDA_PACKAGES
+    #   value: numba xarray -c conda-forge
+    - name: EXTRA_PIP_PACKAGES
+      value: dask-ml --upgrade
+
+jupyter:
+  enabled: false
