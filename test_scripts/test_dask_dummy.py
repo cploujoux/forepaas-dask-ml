@@ -4,10 +4,9 @@ from distributed import Client
 import dask
 
 print('connecting')
-
-client = Client("127.0.0.1:8786")
-
+client = Client("tcp://127.0.0.1:8786")
 print("connected")
+
 
 def double(x):
     sleep(1)
@@ -22,17 +21,21 @@ def inc(x):
     sleep(1)
     return x + 1
 
+
 def main():
-    data = [12, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     results = []
-    for x in data:
-        if is_even(x):  
+    for x in range(10000):
+        if is_even(x):
             y = delayed(double)(x)
         else:  
             y = delayed(inc)(x)
         results.append(y)
 
     total = delayed(sum)(results)
+    print("graph computed")
     return total.compute()
 
-print('done')
+
+if __name__ == "__main__":
+    main()
+    print('Done')
