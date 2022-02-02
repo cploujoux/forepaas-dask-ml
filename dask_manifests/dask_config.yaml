@@ -1,4 +1,12 @@
+scheduler:
+  name: scheduler
+  image:
+    repository: "dask-pod"
+    tag: 0.0.1
+    pullPolicy: IfNotPresent
+    pullSecrets:
 worker:
+  name: worker
   replicas: 2
   resources:
     limits:
@@ -10,8 +18,8 @@ worker:
   env:
     # - name: EXTRA_CONDA_PACKAGES
     #   value: numba xarray -c conda-forge
-    - name: EXTRA_PIP_PACKAGES
-      value: dask-ml --upgrade
+    # - name: EXTRA_PIP_PACKAGES
+    #   value: dask-ml --upgrade
 
 jupyter:
   enabled: false
