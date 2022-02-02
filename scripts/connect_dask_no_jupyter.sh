@@ -1,9 +1,9 @@
 #!/bin/sh
 # echo "Launching cluster ..."
-# helm repo add dask https://helm.dask.org/
-# helm repo update
-# helm install my-dask dask/dask
-# helm upgrade my-dask dask/dask -f dask_config.yaml
+helm repo add dask https://helm.dask.org/
+helm repo update
+helm install my-dask dask/dask
+helm upgrade my-dask dask/dask -f ../dask_manifests/dask_config.yaml
 # echo "Cluster launched"
 
 echo "Exporting variables..."
