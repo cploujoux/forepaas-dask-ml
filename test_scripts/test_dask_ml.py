@@ -2,11 +2,12 @@
 
 
 
-from dask.distributed import Client
+from dask.distributed import Client, LocalCluster
 
 print('connecting')
 
-client = Client("127.0.0.1:8786")
+cluster = LocalCluster()
+client = Client(cluster)
 
 print("connected")
 

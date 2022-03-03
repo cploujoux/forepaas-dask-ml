@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: master-deployment
+  labels:
+    app: master
+spec:
+  template:
+    spec:
+      containers:
+        - name: master
+          image: dask-pod:0.0.1
+          imagePullPolicy: IfNotPresent
+          command:
+            - echo 'starting'
+            - /bin/bash
+            - -c
+            - mc cp myminio/mybucket/test-output.py .
+            - python3 test.py
+            - mc cp output.txt myminio/mybucket/output.txt
+      restartPolicy: Never

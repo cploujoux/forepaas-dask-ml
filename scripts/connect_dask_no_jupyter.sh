@@ -2,7 +2,7 @@
 # echo "Launching cluster ..."
 # helm repo add dask https://helm.dask.org/
 # helm repo update
-#helm upgrade my-dask dask/dask -f ../dask_manifests/dask_config.yaml
+#helm install my-dask dask/dask -f ../dask_manifests/dask_config.yaml
 #helm upgrade my-dask dask/dask -f ../dask_manifests/dask_config.yaml
 # echo "Cluster launched"
 
