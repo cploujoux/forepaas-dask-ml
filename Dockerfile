@@ -12,6 +12,3 @@ RUN apt-get install -y curl
 RUN \
     curl https://dl.min.io/client/mc/release/linux-amd64/mc > /usr/bin/mc && \
     chmod +x /usr/bin/mc
-
-
-
