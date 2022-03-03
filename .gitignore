@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 mnt/
+memcached-operator/
+.idea

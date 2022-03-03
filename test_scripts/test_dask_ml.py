@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-
-
-
 from dask.distributed import Client, LocalCluster
 
 print('connecting')
