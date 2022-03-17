@@ -34,6 +34,14 @@ scheduler:
   nodeSelector: {} # Node Selector.
   securityContext: {} # Security Context.
   # serviceAccountName: ""
+  # added parameters
+  masterImage:
+    repository: "dask-pod" # Container image repository.
+    tag: 0.0.2 # Container image tag.
+    pullPolicy: IfNotPresent # Container image pull policy.
+  minioUrl: "http://138.195.245.105:9000"
+  inputScriptPath: "/mybucket/thetest.py"
+  outputPath: "/mybucket/outputs/joboutput-matt-helm2.txt"
 
 webUI:
   name: webui # Dask webui name.

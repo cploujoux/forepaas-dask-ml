@@ -11,14 +11,6 @@ metadata:
     chart: {{ template "dask.chart" . }}
     component: scheduler
 spec:
-  # replicas: {{ .Values.scheduler.replicas }}
-  # selector:
-  #   matchLabels:
-  #     app: {{ template "dask.name" . }}
-  #     release: {{ .Release.Name | quote }}
-  #     component: scheduler
-  # strategy:
-  #   type: RollingUpdate
   template:
     metadata:
       labels:
@@ -50,14 +42,14 @@ spec:
           env:
             {{- toYaml .Values.scheduler.env | nindent 12 }}
         - name: {{ template "dask.fullname" . }}-master
-          image: dask-pod:0.0.2
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.scheduler.masterImage.repository }}:{{ .Values.scheduler.masterImage.tag }}"
+          imagePullPolicy:  {{ .Values.scheduler.masterImage.pullPolicy }}
           ports:
             - containerPort: 8788
           command:
             - /bin/bash
             - -c
-            - mc alias set myminio http://138.195.245.105:9000 minioadmin minioadmin ; echo 3 ; mc cp myminio/mybucket/thetest.py ./test.py ; echo 4 ; python ./test.py ; echo 5 ; mc cp ./output.txt myminio/mybucket/outputs/joboutput.txt ; echo 6;
+            - mc alias set myminio {{ .Values.scheduler.minioUrl }} minioadmin minioadmin ; mc cp myminio/{{ .Values.scheduler.inputScriptPath }} ./test.py ; python ./test.py ; mc cp ./output.txt myminio/{{ .Values.scheduler.outputPath }} ;
           resources:
             {{- toYaml .Values.scheduler.resources | nindent 12 }}
     {{- with .Values.scheduler.nodeSelector }}
