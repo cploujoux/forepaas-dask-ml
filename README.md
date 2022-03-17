@@ -5,7 +5,7 @@
 First, go to the repository root and build the Docker image locally :
 
 ```
-docker build . -t dask-image.0.0.2
+docker build . -t dask-pod.0.0.2
 ```
 
 Then, create a local Minio server and copy the Python test file inside a bucket : 
@@ -16,8 +16,8 @@ mc mb my-test-storage/my-minio-bucket
 mc cp ./test_scripts/test_dask_ml.py my-test-storage/my-minio-bucket/test_dask_ml.py
 ```
 
-Modify the minio server IP address in the  	`dask-helm-chart1/templates/dask-scheduler-deployment.yaml`, line 60.
-Also modify the output name
+Adpat values to correspond to your paths and urls
+
 In a terminal, execute the following command :
 
 ```
