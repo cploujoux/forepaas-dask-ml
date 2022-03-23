@@ -36,7 +36,7 @@ def inc(x):
 
 def main():
     results = []
-    for x in range(10):
+    for x in range(1000):
         if is_even(x):
             y = delayed(double)(x)
         else:

@@ -29,4 +29,5 @@ spec:
           - mc alias set myminio http://192.168.1.55:9000 minioadmin minioadmin; echo 3; mc cp myminio/mybucket/thetest.py ./test.py; echo 4; python ./test.py; echo 5; mc cp ./output.txt myminio/mybucket/outputs/joboutput.txt; echo 6; 
           resources:
             {{- toYaml .Values.scheduler.resources | nindent 12 }}
+
 {{ end }}

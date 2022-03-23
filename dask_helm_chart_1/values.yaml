@@ -2,6 +2,10 @@
 # nameOverride: dask
 # fullnameOverride: dask
 
+minioUrl: "http://138.195.245.105:9000"
+inputScriptPath: "/mybucket/thetest.py"
+outputPath: "/mybucket/outputs/joboutput-matt-helm2.txt"
+
 scheduler:
   name: scheduler # Dask scheduler name.
   enabled: true # Enable/disable scheduler.
@@ -39,9 +43,6 @@ scheduler:
     repository: "dask-pod" # Container image repository.
     tag: 0.0.2 # Container image tag.
     pullPolicy: IfNotPresent # Container image pull policy.
-  minioUrl: "http://138.195.245.105:9000"
-  inputScriptPath: "/mybucket/thetest.py"
-  outputPath: "/mybucket/outputs/joboutput-matt-helm2.txt"
 
 webUI:
   name: webui # Dask webui name.
