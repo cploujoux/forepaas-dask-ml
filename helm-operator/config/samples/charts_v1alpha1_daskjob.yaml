@@ -1,0 +1,76 @@
+apiVersion: charts.my.domain/v1alpha1
+kind: DaskJob
+metadata:
+  name: daskjob-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/dask-job/values.yaml
+  inputScriptPath: /mybucket/thetest.py
+  minioUrl: http://138.195.241.129:9000
+  outputPath: /mybucket/outputs/joboutput-from-operator.txt
+  scheduler:
+    affinity: {}
+    enabled: true
+    extraArgs: []
+    image:
+      pullPolicy: IfNotPresent
+      pullSecrets: null
+      repository: daskdev/dask
+      tag: 2022.2.1
+    loadBalancerIP: null
+    masterImage:
+      pullPolicy: IfNotPresent
+      repository: dask-pod
+      tag: 0.0.2
+    name: scheduler
+    nodeSelector: {}
+    replicas: 1
+    resources: {}
+    securityContext: {}
+    serviceAnnotations: {}
+    servicePort: 8786
+    serviceType: ClusterIP
+    tolerations: []
+  webUI:
+    ingress:
+      annotations: {}
+      enabled: false
+      hostname: dask-ui.example.com
+      tls: false
+    name: webui
+    servicePort: 80
+  worker:
+    affinity: {}
+    annotations: {}
+    custom_scheduler_url: null
+    default_resources:
+      cpu: 1
+      memory: 4GiB
+    env: null
+    extraArgs: []
+    image:
+      dask_worker: dask-worker
+      pullPolicy: IfNotPresent
+      pullSecrets: null
+      repository: daskdev/dask
+      tag: 2022.2.1
+    metrics:
+      enabled: false
+      podMonitor:
+        additionalLabels: {}
+        enabled: false
+        interval: 30s
+        jobLabel: ""
+        metricRelabelings: []
+        namespace: ""
+        namespaceSelector: {}
+        podTargetLabels: []
+    mounts: {}
+    name: worker
+    nodeSelector: {}
+    portDashboard: 8790
+    replicas: 3
+    resources: {}
+    securityContext: {}
+    strategy:
+      type: RollingUpdate
+    tolerations: []
