@@ -1,5 +1,5 @@
-apiVersion: batch/v1
-kind: Job
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ template "dask.fullname" . }}-worker
   labels:
@@ -10,13 +10,13 @@ metadata:
     component: worker
 spec:
   replicas: {{ .Values.worker.replicas }}
-  parallelism: 3
-  # manualSelector: true
-  # selector:
-  #   matchLabels:
-  #     app: {{ template "dask.name" . }}
-  #     release: {{ .Release.Name | quote }}
-  #     component: worker
+  selector:
+    matchLabels:
+      app: {{ template "dask.name" . }}
+      release: {{ .Release.Name | quote }}
+      component: worker
+  strategy:
+    type: {{ .Values.worker.strategy.type }}
   template:
     metadata:
       labels:
@@ -28,7 +28,6 @@ spec:
         {{- toYaml .Values.worker.annotations | nindent 8 }}
       {{- end }}
     spec:
-      restartPolicy: Never
       imagePullSecrets:
         {{- toYaml .Values.worker.image.pullSecrets | nindent 8 }}
       {{- if .Values.worker.mounts.volumes }}
