@@ -2,6 +2,8 @@ import dask_ml.datasets
 import dask_ml.cluster
 import pickle
 
+output_path = "model.pkl"
+
 X, y = dask_ml.datasets.make_blobs(n_samples=10000000,
                                    chunks=1000000,
                                    random_state=0,
@@ -11,4 +13,4 @@ X = X.persist()
 km = dask_ml.cluster.KMeans(n_clusters=3, init_max_iter=2, oversampling_factor=10)
 km.fit(X)
 
-pickle.dump(km, open("model.pkl", "wb"))
+pickle.dump(km, open(output_path, "wb"))
