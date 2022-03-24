@@ -11,6 +11,7 @@ metadata:
     chart: {{ template "dask.chart" . }}
     component: scheduler
 spec:
+  ttlSecondsAfterFinished: {{.Values.ttlSecondsAfterFinished }}
   template:
     metadata:
       labels:
@@ -49,7 +50,7 @@ spec:
           command:
             - /bin/bash
             - -c
-            - mc alias set myminio {{ .Values.minioUrl }} minioadmin minioadmin ; mc cp myminio/{{ .Values.inputScriptPath }} ./test.py ; python ./test.py ; mc cp ./output.txt myminio/{{ .Values.outputPath }} ;
+            - mc alias set myminio {{ .Values.minioUrl }} minioadmin minioadmin ; mc cp myminio/{{ .Values.inputScriptPath }} ./test.py ; python ./test.py ; mc cp .{{ .Values.scriptOutputPath }}  myminio/{{ .Values.minioOutputPath }} ;
           resources:
             {{- toYaml .Values.scheduler.resources | nindent 12 }}
     {{- with .Values.scheduler.nodeSelector }}

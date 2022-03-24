@@ -9,7 +9,8 @@ metadata:
     chart: {{ template "dask.chart" . }}
     component: worker
 spec:
-  parallelism: 3
+  ttlSecondsAfterFinished: {{.Values.ttlSecondsAfterFinished }}
+  parallelism:  {{ .Values.numberOfWorkers }}
   # manualSelector: true
   # selector:
   #   matchLabels:

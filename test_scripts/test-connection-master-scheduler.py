@@ -36,7 +36,7 @@ def inc(x):
 
 def main():
     results = []
-    for x in range(1000):
+    for x in range(100):
         if is_even(x):
             y = delayed(double)(x)
         else:
@@ -54,8 +54,8 @@ if __name__ == "__main__":
     main()
     print("--- %s seconds ---" % (time.time() - start_time))
     # print("Done")
-    f = open("output.txt", "w")
-    f.write("Hello I am the result from the job the real one one one one")
+    f = open("output2.txt", "w")
+    f.write("Hello I am the result from the job")
     f.close()
     client.shutdown()
     client.close()
