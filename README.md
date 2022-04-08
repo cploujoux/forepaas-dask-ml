@@ -24,3 +24,26 @@ In a terminal, execute the following command :
 helm install my-dask-1 ./dask_helm_chart_1
 ```
 
+## Operator
+
+```
+cd dask-operator
+```
+
+To setup the operator
+
+```
+make docker-build docker-push
+```
+
+To deploy the operator
+
+```
+make deploy
+```
+
+Deploy sample CR
+
+```
+kubeclt apply -f ./config/samples/charts_v1alpha1_daskjob.yaml
+```
