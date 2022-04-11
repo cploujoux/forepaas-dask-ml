@@ -131,3 +131,4 @@ dmypy.json
 mnt/
 memcached-operator/
 .idea
+.DS_Store
