@@ -4,10 +4,12 @@ metadata:
   name: daskjob-sample
 spec:
   # Default values copied from <project_dir>/helm-charts/dask-job/values.yaml
-  inputScriptPath: /mybucket/thetest.py
-  minioOutputPath: /mybucket/outputs/joboutput.txt
-  minioUrl: http://138.195.241.129:9000
+  inputScriptPath: /mybucket/test2.py
+  minioOutputPath: /mybucket/outputs/joboutput2.txt
+  minioUrl: http://192.168.1.55:9000
+  scriptOutputPath: /output.txt
   numberOfWorkers: 3
+  ttlSecondsAfterFinished: null
   scheduler:
     affinity: {}
     enabled: true
@@ -31,8 +33,6 @@ spec:
     servicePort: 8786
     serviceType: ClusterIP
     tolerations: []
-  scriptOutputPath: /output2.txt
-  ttlSecondsAfterFinished: 0
   webUI:
     ingress:
       annotations: {}
@@ -74,5 +74,3 @@ spec:
     resources: {}
     securityContext: {}
     tolerations: []
-  
-  

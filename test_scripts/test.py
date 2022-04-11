@@ -1,5 +1,4 @@
 from distributed import Client
-import dask.dataframe as dd
 from time import sleep
 from dask import delayed
 import socket
@@ -12,13 +11,13 @@ print("connecting")
 client = Client(f"tcp://{socket.gethostbyname(socket.gethostname())}:8786")
 print("connected")
 
-print("connecting")
-df = dd.read_sql_table(
-    table="consommations",
-    uri="postgresql+psycopg2://root:password@127.0.0.1:5432/test",
-    index_col="conso_id",
-)
-print("connected")
+# print("connecting")
+# df = dd.read_sql_table(
+#     table="consommations",
+#     uri="postgresql+psycopg2://root:password@127.0.0.1:5432/test",
+#     index_col="conso_id",
+# )
+# print("connected")
 
 
 def double(x):
@@ -37,7 +36,7 @@ def inc(x):
 
 def main():
     results = []
-    for x in range(1000):
+    for x in range(100):
         if is_even(x):
             y = delayed(double)(x)
         else:
@@ -56,8 +55,7 @@ if __name__ == "__main__":
     print("--- %s seconds ---" % (time.time() - start_time))
     # print("Done")
     f = open("output.txt", "w")
-    f.write("Hello I am the result from the job, the job that does it all")
-    df.to_csv("./export.csv")
+    f.write(f"Hello I am the result from the job ${time.time() - start_time}")
     f.close()
     client.shutdown()
     client.close()

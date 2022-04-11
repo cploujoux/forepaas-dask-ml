@@ -2,10 +2,10 @@
 # nameOverride: dask
 # fullnameOverride: dask
 
-minioUrl: "http://138.195.241.129:9000"
-inputScriptPath: "/mybucket/thetest.py"
-scriptOutputPath: "/output2.txt"
-minioOutputPath: "/mybucket/outputs/joboutput.txt"
+minioUrl: "http://192.168.1.55:9000"
+inputScriptPath: "/mybucket/test2.py"
+scriptOutputPath: "/output.txt"
+minioOutputPath: "/mybucket/outputs/joboutput2.txt"
 numberOfWorkers: 3
 ttlSecondsAfterFinished: 0
 
