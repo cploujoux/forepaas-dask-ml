@@ -19,10 +19,16 @@ mc cp ./test_scripts/test.py my-test-storage/my-minio-bucket/test.py
 
 Adpat the helm chart values to correspond to your paths and urls 
 
-In a terminal, execute the following command :
+In a terminal, execute the following command to run the job using helm :
 
 ```
 helm install my-dask ./dask_job_chart
+```
+
+After running your jobs you can run
+
+```
+helm delete my-dask 
 ```
 
 ## Operator
@@ -37,16 +43,35 @@ To setup the operator
 make docker-build docker-push
 ```
 
+NB: if you are running locally on minikube you will need to load the created docker image with 
+
+```
+minikube image load my.domain/dask-operator:0.0.1
+```
+
+
 To deploy the operator
 
 ```
 make deploy
 ```
 
+
+
 Deploy sample CR
 
 ```
 kubeclt apply -f ./config/samples/charts_v1alpha1_daskjob.yaml
+```
+
+Add the end of the job you should then delete the CR
+```
+kubeclt delete -f ./config/samples/charts_v1alpha1_daskjob.yaml
+```
+
+To destroy the operator use 
+```
+make undeploy
 ```
 
 
