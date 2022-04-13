@@ -2,6 +2,7 @@ import joblib
 import dask.distributed
 from sklearn.datasets import make_classification
 from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
 
 c = dask.distributed.Client()
 
