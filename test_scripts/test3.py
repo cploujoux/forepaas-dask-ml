@@ -1,40 +1,40 @@
-from sklearn.datasets import make_classification
-from sklearn.svm import SVC
-from sklearn.model_selection import GridSearchCV
+import numpy as np
+from dask.distributed import Client
 import joblib
-from distributed import Client
+from sklearn.datasets import load_digits
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.svm import SVC
 import socket
 import time
 
-start_time = time.time()
-
-output_path = "model.pkl"
-
-client = Client(f"tcp://{socket.gethostbyname(socket.gethostname())}:8786")
-
-X, y = make_classification(n_samples=1000, random_state=0)
-
-param_grid = {
-    "C": [0.001, 0.01, 0.1, 0.5, 1.0, 2.0, 5.0, 10.0],
-    "kernel": ["rbf", "poly", "sigmoid"],
-    "shrinking": [True, False],
-}
+# is subject to the bug https://github.com/joblib/joblib/issues/1201
 
 
-grid_search = GridSearchCV(
-    SVC(gamma="auto", random_state=0, probability=True),
-    param_grid=param_grid,
-    return_train_score=False,
-    cv=3,
-    n_jobs=-1,
-)
+if __name__ == "__main__":
+    start_time = time.time()
 
-with joblib.parallel_backend("dask"):
-    grid_search.fit(X, y)
+    output_path = "model.pkl"
 
-joblib.dump(grid_search, output_path)
+    client = Client(f"tcp://{socket.gethostbyname(socket.gethostname())}:8786")
+    # client = Client()
 
+    digits = load_digits()
 
-client.shutdown()
-client.close()
-print("--- %s seconds ---" % (time.time() - start_time))
+    param_space = {
+        "C": np.logspace(-6, 6, 13),
+        "gamma": np.logspace(-8, 8, 17),
+        "tol": np.logspace(-4, -1, 4),
+        "class_weight": [None, "balanced"],
+    }
+
+    model = SVC(kernel="rbf")
+    search = RandomizedSearchCV(model, param_space, cv=3, n_iter=50, verbose=10)
+
+    with joblib.parallel_backend("dask"):
+        search.fit(digits.data, digits.target)
+
+    joblib.dump(search, output_path)
+
+    client.shutdown()
+    client.close()
+    print("--- %s seconds ---" % (time.time() - start_time))

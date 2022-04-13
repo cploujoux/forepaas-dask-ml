@@ -2,11 +2,11 @@
 # nameOverride: dask
 # fullnameOverride: dask
 
-minioUrl: "http://192.168.1.55:9000"
-inputScriptPath: "/mybucket/test2.py"
-scriptOutputPath: "/output.txt"
-minioOutputPath: "/mybucket/outputs/joboutput2.txt"
-numberOfWorkers: 3
+minioUrl: "http://138.195.244.186:9000"
+inputScriptPath: "/mybucket/test4.py"
+scriptOutputPath: "/model.pkl"
+minioOutputPath: "/mybucket/outputs/output.pkl"
+numberOfWorkers: 2
 ttlSecondsAfterFinished: 0
 
 scheduler:
@@ -44,7 +44,7 @@ scheduler:
   # added parameters
   masterImage:
     repository: "dask-pod" # Container image repository.
-    tag: 0.0.2 # Container image tag.
+    tag: 0.0.3 # Container image tag.
     pullPolicy: IfNotPresent # Container image pull policy.
 
 webUI:
@@ -64,8 +64,10 @@ webUI:
 worker:
   name: worker # Dask worker name.
   image:
-    repository: "daskdev/dask" # Container image repository.
-    tag: 2022.2.1 # Container image tag.
+    # repository: "daskdev/dask" # Container image repository.
+    # tag: 2022.2.1 # Container image tag.
+    repository: "dask-nominio" # Container image repository.
+    tag: 0.0.1 # Container image tag.
     pullPolicy: IfNotPresent # Container image pull policy.
     dask_worker: "dask-worker" # Dask worker command. E.g `dask-cuda-worker` for GPU worker.
     pullSecrets: # Container image [pull secrets](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).
@@ -74,13 +76,14 @@ worker:
   default_resources: # overwritten by resource limits if they exist
     cpu: 1 # Default CPU (DEPRECATED use `resources`).
     memory: "4GiB" # Default memory (DEPRECATED use `resources`).
-  env: # Environment variables. See `values.yaml` for example values.
+  env:
+  # Environment variables. See `values.yaml` for example values.
   #  - name: EXTRA_APT_PACKAGES
   #    value: build-essential openssl
   #  - name: EXTRA_CONDA_PACKAGES
   #    value: numba xarray -c conda-forge
-  #  - name: EXTRA_PIP_PACKAGES
-  #    value: s3fs dask-ml prometheus-client --upgrade
+  # - name: EXTRA_PIP_PACKAGES
+  #   value: dask-ml
   extraArgs:
     [] # Extra CLI arguments to be passed to the worker
     # - --preload

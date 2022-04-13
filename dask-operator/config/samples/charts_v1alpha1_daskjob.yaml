@@ -5,10 +5,10 @@ metadata:
 spec:
   # Default values copied from <project_dir>/helm-charts/dask-job/values.yaml
   inputScriptPath: /mybucket/test2.py
-  minioOutputPath: /mybucket/outputs/joboutput2.txt
-  minioUrl: http://192.168.1.55:9000
+  minioOutputPath: /mybucket/outputs/output2.txt
+  minioUrl: http://138.195.59.249:9000
   scriptOutputPath: /output.txt
-  numberOfWorkers: 3
+  numberOfWorkers: 2
   ttlSecondsAfterFinished: null
   scheduler:
     affinity: {}
@@ -23,7 +23,7 @@ spec:
     masterImage:
       pullPolicy: IfNotPresent
       repository: dask-pod
-      tag: 0.0.2
+      tag: 0.0.3
     name: scheduler
     nodeSelector: {}
     replicas: 1
@@ -54,8 +54,8 @@ spec:
       dask_worker: dask-worker
       pullPolicy: IfNotPresent
       pullSecrets: null
-      repository: daskdev/dask
-      tag: 2022.2.1
+      repository: dask-nominio
+      tag: 0.0.1
     metrics:
       enabled: false
       podMonitor:

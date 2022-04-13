@@ -1,5 +1,7 @@
 FROM daskdev/dask:2022.1.1-py3.8
 
+ENV PYTHONUNBUFFERED=1
+
 COPY requirements-ml-minimal.txt requirements.txt
 RUN python -m pip install --upgrade pip
 RUN pip install --upgrade pip setuptools wheel

@@ -14,8 +14,8 @@ print("connected")
 
 print("connecting")
 df = dd.read_sql_table(
-    table="consommations",
-    uri="postgresql+psycopg2://root:password@10.111.17.123:5432/test",
+    table_name="consommations",
+    con="postgresql+psycopg2://root:password@10.100.60.233:5432/test",
     index_col="conso_id",
 )
 print("connected")
@@ -37,7 +37,7 @@ def inc(x):
 
 def main():
     results = []
-    for x in range(1000):
+    for x in range(500):
         if is_even(x):
             y = delayed(double)(x)
         else:
@@ -45,7 +45,6 @@ def main():
         results.append(y)
 
     total = delayed(sum)(results)
-    print("graph computed")
     return total.compute()
 
 

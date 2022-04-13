@@ -2,10 +2,14 @@
 
 ## Getting started
 
-First, go to the repository root and build the Docker image locally :
+First, go to the repository root and build the Docker images locally :
 
 ```
-docker build . -t dask-pod.0.0.2
+docker build . -t dask-pod.0.0.3
+```
+
+```
+docker build -t dask-nomnio.0.0.1 -f Dockerfile.nominio .
 ```
 
 Then, create a local Minio server and copy the Python test file inside a bucket : 
