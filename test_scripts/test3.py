@@ -4,6 +4,9 @@ from sklearn.model_selection import GridSearchCV
 import joblib
 from distributed import Client
 import socket
+import time
+
+start_time = time.time()
 
 output_path = "model.pkl"
 
@@ -16,6 +19,7 @@ param_grid = {
     "kernel": ["rbf", "poly", "sigmoid"],
     "shrinking": [True, False],
 }
+
 
 grid_search = GridSearchCV(
     SVC(gamma="auto", random_state=0, probability=True),
@@ -33,3 +37,4 @@ joblib.dump(grid_search, output_path)
 
 client.shutdown()
 client.close()
+print("--- %s seconds ---" % (time.time() - start_time))
